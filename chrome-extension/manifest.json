@@ -1,0 +1,22 @@
+{
+  "name"   : "github-adjuster",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "Githubのコードビューワの幅を調整可能とする拡張です",
+  "icons": {
+    "48" : "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "permissions": [
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://github.com/**/pull/**/files", "https://github.com/**/blob/*"],
+      "js"     : ["lib/jquery.min.js", "js/script.js"],
+      "css"    : ["css/style.css"],
+      "run_at" : "document_start"
+    }
+
+  ]
+}
