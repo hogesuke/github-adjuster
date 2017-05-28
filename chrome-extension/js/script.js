@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
   wButton.classList.add('btn');
   wButton.classList.add('btn-sm');
   wButton.classList.add('BtnGroup-item');
-  wButton.textContent = '?w=';
+  wButton.textContent = '?w=1';
   wButton.style.fontSize = '12px';
 
   buttonContainer.appendChild(broadButton);
