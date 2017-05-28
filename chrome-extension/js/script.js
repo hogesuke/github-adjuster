@@ -1,12 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const container = document.querySelector('#js-repo-pjax-container > .container');
-  const baseWidth = container.clientWidth;
-  let positionCount = 0;
+  const body = document.querySelector('body');
 
   const buttonContainer = document.createElement('div');
   const narrowButton = document.createElement('button');
   const broadButton = document.createElement('button');
-  const backButton = document.createElement('button');
 
   buttonContainer.style.position = 'fixed';
   buttonContainer.style.bottom = '0';
@@ -19,12 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
   broadButton.textContent = '< >';
   broadButton.style.fontSize = '12px';
 
-  backButton.classList.add('btn');
-  backButton.classList.add('btn-sm');
-  backButton.classList.add('BtnGroup-item');
-  backButton.textContent = 'Reset';
-  backButton.style.fontSize = '12px';
-
   narrowButton.classList.add('btn');
   narrowButton.classList.add('btn-sm');
   narrowButton.classList.add('BtnGroup-item');
@@ -32,29 +23,25 @@ document.addEventListener('DOMContentLoaded', () => {
   narrowButton.style.fontSize = '12px';
 
   buttonContainer.appendChild(broadButton);
-  buttonContainer.appendChild(backButton);
   buttonContainer.appendChild(narrowButton);
 
-  container.appendChild(buttonContainer);
+  body.appendChild(buttonContainer);
 
-  const adjust = () => {
-    const width = (baseWidth + 100 * positionCount) + 'px';
-    if (width < 100) { return; }
-    container.style.width = width;
+  const adjust = (extend) => {
+    const container = document.querySelector('#js-repo-pjax-container > .container');
+    if (!container) { return; }
+
+    const baseWidth = container.clientWidth;
+    const nextWidth = baseWidth + 100 * (extend ? 1 : -1);
+    if (nextWidth < 100) { return; }
+    container.style.width = nextWidth + 'px';
   };
 
   broadButton.addEventListener('click', () => {
-    positionCount++;
-    adjust();
+    adjust(true);
   });
 
   narrowButton.addEventListener('click', () => {
-    positionCount--;
-    adjust();
-  });
-
-  backButton.addEventListener('click', () => {
-    positionCount = 0;
-    adjust();
+    adjust(false);
   });
 });

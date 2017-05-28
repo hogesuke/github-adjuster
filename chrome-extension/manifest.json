@@ -12,7 +12,7 @@
   ],
   "content_scripts": [
     {
-      "matches": ["https://github.com/*/pull/*/files", "https://github.com/*/blob/*", "https://github.com/*/commits/*"],
+      "matches": ["https://github.com/*"],
       "js"     : ["js/script.js"],
       "css"    : ["css/style.css"],
       "run_at" : "document_start"
