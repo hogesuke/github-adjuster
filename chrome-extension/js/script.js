@@ -49,15 +49,15 @@ document.addEventListener('DOMContentLoaded', () => {
   narrowButton.addEventListener('click', () => adjust(false));
 
   const toggleIgnoreSpace = () => {
-              const mark = 'w=';
-              const queries = location.search.replace(/^\?/, '').split('&');
+    const mark = 'w=1';
+    const queries = location.search.replace(/^\?/, '').split('&');
 
-              if (queries.includes(mark)) {
-                const q = queries.filter(a => a !== mark);
-                location.search = q.join('&');
-              } else {
-                location.search ? location.search += `&${mark}` : location.search = `?${mark}`;
-              }
+    if (queries.includes(mark)) {
+      const q = queries.filter(a => a !== mark);
+      location.search = q.join('&');
+    } else {
+      location.search ? location.search += `&${mark}` : location.search = `?${mark}`;
+    }
   };
 
   wButton.addEventListener('click', () => toggleIgnoreSpace());
