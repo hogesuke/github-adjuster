@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const buttonContainer = document.createElement('div');
   const narrowButton = document.createElement('button');
   const broadButton = document.createElement('button');
+  const wButton = document.createElement('button');
 
   buttonContainer.style.position = 'fixed';
   buttonContainer.style.bottom = '0';
@@ -22,8 +23,15 @@ document.addEventListener('DOMContentLoaded', () => {
   narrowButton.textContent = '><';
   narrowButton.style.fontSize = '12px';
 
+  wButton.classList.add('btn');
+  wButton.classList.add('btn-sm');
+  wButton.classList.add('BtnGroup-item');
+  wButton.textContent = '?w=';
+  wButton.style.fontSize = '12px';
+
   buttonContainer.appendChild(broadButton);
   buttonContainer.appendChild(narrowButton);
+  buttonContainer.appendChild(wButton);
 
   body.appendChild(buttonContainer);
 
@@ -37,11 +45,20 @@ document.addEventListener('DOMContentLoaded', () => {
     container.style.width = nextWidth + 'px';
   };
 
-  broadButton.addEventListener('click', () => {
-    adjust(true);
-  });
+  broadButton.addEventListener('click', () => adjust(true));
+  narrowButton.addEventListener('click', () => adjust(false));
 
-  narrowButton.addEventListener('click', () => {
-    adjust(false);
-  });
+  const toggleIgnoreSpace = () => {
+    const mark = 'w=';
+    const queries = location.search.replace(/^\?/, '').split('&');
+
+    if (queries.includes(mark)) {
+      const q = queries.filter(a => a !== mark);
+      location.search = q.join('&');
+    } else {
+      location.search ? location.search += `&${mark}` : location.search = `?${mark}`;
+    }
+  };
+
+  wButton.addEventListener('click', () => toggleIgnoreSpace());
 });
